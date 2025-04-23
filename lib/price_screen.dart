@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'coin_data.dart';
+import 'network.dart';
 
 class PriceScreen extends StatefulWidget {
   const PriceScreen({super.key});
@@ -10,6 +11,19 @@ class PriceScreen extends StatefulWidget {
 
 class PriceScreenState extends State<PriceScreen> {
   String? selectedCurr = "USD";
+
+  @override
+  void initState() {
+    super.initState();
+    print("Hello, world");
+    getCurrencyData();
+  }
+
+  void getCurrencyData() async {
+    CoinExchange exchangeData = CoinExchange(fromCurr: "BTC", toCurr: "USD");
+    var response = await exchangeData.getResponse();
+    print(response.body);
+  }
 
   @override
   Widget build(BuildContext context) {
